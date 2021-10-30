@@ -7,6 +7,10 @@ export class ForestryController {
     this.forestryView = forestryView;
   }
 
+  handleShowDialog(){
+    this.forestryView.showAddForestryDialog();
+  }
+
   async getForestry() {
     // const res = await fetch('api');
     const res = "forestry value";
