@@ -30,10 +30,16 @@ export class ForestryViewComponent implements OnInit {
   }
 
   showAddForestryDialog(){
-    const dialogRef = this.dialog.open(AddForestryDialogComponent);
+    const dialogConfig = {
+      width: '600px',
+      data: {data1: 'value1', data2: 'value2'}
+    }
+    const dialogRef = this.dialog.open(AddForestryDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(result)
+      // todo
+      // create forestry from received data (with controller)
     });
   }
 

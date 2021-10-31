@@ -9,6 +9,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { AddForestryDialogComponent } from './views/forestry-view/add-forestry-dialog/add-forestry-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -23,7 +27,12 @@ import {MatDialogModule} from "@angular/material/dialog";
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbModule,
+    MatInputModule,
+    FormsModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
