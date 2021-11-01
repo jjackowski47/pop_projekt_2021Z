@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from "@angular/forms";
+import { ForestryController } from 'src/app/controllers/forestry-controller/forestry-controller';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-forestry-dialog',
@@ -31,7 +33,8 @@ export class AddForestryDialogComponent implements OnInit {
     return formValues
   }
 
-  constructor() { }
+  constructor() {   
+  }
 
   ngOnInit(): void {
   }
