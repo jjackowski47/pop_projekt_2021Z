@@ -1,6 +1,6 @@
 from flask import Flask
-from api.forestry_api import forestry_api
-from api.sensors_api import sensor_api
+from app.api.forestry_api import forestry_api
+from app.api.sensors_api import sensor_api
 
 app = Flask(__name__)
 app.config["DEBUG"] = True

@@ -3,8 +3,8 @@ from flask import Response
 
 from pydantic.error_wrappers import ValidationError
 
-from db.sensor import Sensor
-from models.sensor_dto import SensorDto
+from app.db.sensor import Sensor
+from app.models.sensor_dto import SensorDto
 
 
 sensor_api = Blueprint('sensor_api', __name__)

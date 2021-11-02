@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from models.sensor_dto import SensorDto
+from app.models.sensor_dto import SensorDto
 
 
 class SensorDao(metaclass=ABCMeta):

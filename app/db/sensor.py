@@ -1,6 +1,6 @@
-from database import Database
-from interfaces.sensor_dao import SensorDao
-from models.sensor_dto import SensorDto
+from app.database import Database
+from app.interfaces.sensor_dao import SensorDao
+from app.models.sensor_dto import SensorDto
 
 
 class Sensor(SensorDao):

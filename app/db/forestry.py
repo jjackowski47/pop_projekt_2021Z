@@ -1,7 +1,7 @@
 from pydantic.types import UUID1
-from database import Database
-from interfaces.forestry_dao import ForestryDao
-from models.forestry_dto import ForestryDto
+from app.database import Database
+from app.interfaces.forestry_dao import ForestryDao
+from app.models.forestry_dto import ForestryDto
 
 
 class Forestry(ForestryDao):

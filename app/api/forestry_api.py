@@ -3,8 +3,8 @@ from flask import Response
 
 from pydantic.error_wrappers import ValidationError
 
-from models.forestry_dto import ForestryDto
-from db.forestry import Forestry
+from app.models.forestry_dto import ForestryDto
+from app.db.forestry import Forestry
 
 
 forestry_api = Blueprint('forestry_api', __name__)

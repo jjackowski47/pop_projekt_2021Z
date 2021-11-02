@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 from pydantic.types import UUID1
-from models.forestry_dto import ForestryDto
+from app.models.forestry_dto import ForestryDto
 
 
 class ForestryDao(metaclass=ABCMeta):
