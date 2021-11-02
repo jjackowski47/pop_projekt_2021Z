@@ -7,7 +7,7 @@
         <div class="col border">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nazwa leśnictwa</mat-label>
-            <input matInput [(ngModel)]="forestryName" name="forestryName">
+            <input matInput [(ngModel)]="forestryName" name="forestryName" />
           </mat-form-field>
         </div>
       </div>
@@ -16,8 +16,7 @@
         <div class="col border">
           <mat-form-field appearance="fill">
             <mat-label>Opcje</mat-label>
-            <mat-select [disabled]="true">
-            </mat-select>
+            <mat-select [disabled]="true"> </mat-select>
           </mat-form-field>
         </div>
       </div>
@@ -26,8 +25,7 @@
         <div class="col border">
           <mat-form-field appearance="fill">
             <mat-label>Opcje</mat-label>
-            <mat-select [disabled]="true">
-            </mat-select>
+            <mat-select [disabled]="true"> </mat-select>
           </mat-form-field>
         </div>
       </div>
@@ -36,9 +34,15 @@
         <div class="col border">
           <mat-form-field appearance="fill">
             <mat-label>Opcje</mat-label>
-            <mat-select [(ngModel)]="selectedForestryBorder" name="forestryBorder">
-              <mat-option *ngFor="let border of forestryBorders" [value]="border">
-                {{border}}
+            <mat-select
+              [(ngModel)]="selectedForestryBorder"
+              name="forestryBorder"
+            >
+              <mat-option
+                *ngFor="let border of forestryBorders"
+                [value]="border"
+              >
+                {{ border }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -47,7 +51,14 @@
       <div class="row">
         <div class="col border">Mapa leśnictwa</div>
         <div class="col border">
-          <input style="width: 200px; height: 50px" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" disabled>
+          <input
+            style="width: 200px; height: 50px"
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/png, image/jpeg"
+            disabled
+          />
         </div>
       </div>
       <div class="row">
@@ -55,7 +66,11 @@
         <div class="col border">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Powierzchnia leśnictwa (ha)</mat-label>
-            <input matInput [(ngModel)]="forestrySurface" name="forestrySurface">
+            <input
+              matInput
+              [(ngModel)]="forestrySurface"
+              name="forestrySurface"
+            />
           </mat-form-field>
         </div>
       </div>
@@ -65,10 +80,13 @@
           <mat-form-field appearance="fill">
             <mat-label>Opcje</mat-label>
             <mat-select [formControl]="afforestation" multiple>
-              <mat-option *ngFor="let afforestation of afforestationTypes" [value]="afforestation">{{afforestation}}</mat-option>
+              <mat-option
+                *ngFor="let afforestation of afforestationTypes"
+                [value]="afforestation"
+                >{{ afforestation }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
-
         </div>
       </div>
       <div class="row">
@@ -76,20 +94,60 @@
         <div class="col border">
           <mat-form-field appearance="fill">
             <mat-label>Opcje</mat-label>
-            <mat-select [(ngModel)]="selectedForesterLodge" name="foresterLodge">
+            <mat-select
+              [(ngModel)]="selectedForesterLodge"
+              name="foresterLodge"
+            >
               <mat-option *ngFor="let lodge of foresterLodges" [value]="lodge">
-                {{lodge}}
+                {{ lodge }}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
       </div>
+      <div class="row">
+        <div class="col border">Współrzędne</div>
+        <div class="col">
+          <mat-form-field appearance="fill" style="width: 50px !important">
+            <mat-label>X</mat-label>
+            <input matInput [(ngModel)]="x" name="x" />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="fill" style="width: 50px !important">
+            <mat-label>Y</mat-label>
+            <input matInput [(ngModel)]="y" name="y" />
+          </mat-form-field>
+        </div>
+        <div>
+          <button
+            mat-button
+            color="primary"
+            cdkFocusInitial
+            (click)="handleAddCoordClick()"
+          >
+            Dodaj współrzędne
+          </button>
+        </div>
+      </div>
     </div>
   </form>
-
+  <mat-list>
+    <mat-list-item *ngFor="let c of coordinates">
+      <span>{{ "x: " + c.x }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>{{ "y: " + c.y }}</span></mat-list-item
+    >
+  </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button color="warn" mat-dialog-close>Anuluj</button>
-  <button mat-button color="primary" [mat-dialog-close]="returnData()" cdkFocusInitial>Dodaj</button>
+  <button
+    mat-button
+    color="primary"
+    [mat-dialog-close]="returnData()"
+    cdkFocusInitial
+  >
+    Dodaj
+  </button>
 </mat-dialog-actions>
-

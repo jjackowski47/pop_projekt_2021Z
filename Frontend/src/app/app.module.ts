@@ -15,6 +15,8 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import {MatListModule} from '@angular/material/list';
+
 
 =======
 import { ForestryWindowComponent } from './windows/forestry-window/forestry-window.component';
@@ -47,9 +49,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
+<<<<<<< HEAD
 =======
     BrowserAnimationsModule
 >>>>>>> master
+=======
+    MatListModule
+>>>>>>> c9010c87a500abffc689727ef584f3bdd9ebebbf
   ],
   providers: [],
   bootstrap: [AppComponent]
