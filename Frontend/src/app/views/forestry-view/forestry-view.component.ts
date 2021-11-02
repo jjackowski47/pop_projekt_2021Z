@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ForestryController } from 'src/app/controllers/forestry-controller/forestry-controller';
-import {AddForestryDialogComponent} from "./add-forestry-dialog/add-forestry-dialog.component";
+import {AddForestryDialogComponent} from "./../forestry-list/add-forestry-dialog/add-forestry-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import { HttpClient} from '@angular/common/http';
 

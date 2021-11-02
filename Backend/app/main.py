@@ -1,12 +1,7 @@
 from flask import Flask
-<<<<<<< HEAD
-from forestry_api import forestry_api
-from sensors_api import sensor_api
-from flask_cors import CORS
-=======
 from api.forestry_api import forestry_api
 from api.sensors_api import sensor_api
->>>>>>> master
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)

@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
 import { ForestryViewComponent } from './views/forestry-view/forestry-view.component';
+import { ForestryWindowComponent } from './windows/forestry-window/forestry-window.component';
+import { ForestryListComponent } from './views/forestry-list/forestry-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import { AddForestryDialogComponent } from './views/forestry-view/add-forestry-dialog/add-forestry-dialog.component';
+import { AddForestryDialogComponent } from './views/forestry-list/add-forestry-dialog/add-forestry-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatInputModule} from '@angular/material/input';
@@ -18,27 +19,17 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 
 
-=======
-import { ForestryWindowComponent } from './windows/forestry-window/forestry-window.component';
-import { ForestryListComponent } from './views/forestry-list/forestry-list.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
->>>>>>> master
-
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    ForestryViewComponent,
-    AddForestryDialogComponent
-=======
     ForestryWindowComponent,
-    ForestryListComponent
->>>>>>> master
+    ForestryViewComponent,
+    ForestryListComponent,
+    AddForestryDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-<<<<<<< HEAD
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
@@ -49,13 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
-<<<<<<< HEAD
-=======
-    BrowserAnimationsModule
->>>>>>> master
-=======
     MatListModule
->>>>>>> c9010c87a500abffc689727ef584f3bdd9ebebbf
   ],
   providers: [],
   bootstrap: [AppComponent]
