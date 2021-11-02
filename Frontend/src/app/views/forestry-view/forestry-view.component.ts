@@ -44,7 +44,8 @@ export class ForestryViewComponent implements OnInit {
       // create forestry from received data (with controller) 
       const forestry = {
         id: "cef0cbf3-6458-4f13-a418-ee4d7e7505dd", // it should be new valid uuid
-        location: [{"x": 1.0, "y": 1.2}, {"x": 1.0, "y": 1.2}, {"x": 1.0, "y": 1.2}],  // it should be forestry location
+        //location: [{"x": 1.0, "y": 1.2}, {"x": 1.0, "y": 1.2}, {"x": 1.0, "y": 1.2}],  // it should be forestry location
+        location: result.coordinates,
         name: result.forestryName
       } 
       this.forestryController.addForestry(forestry);
