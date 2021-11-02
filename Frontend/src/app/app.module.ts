@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { ForestryViewComponent } from './views/forestry-view/forestry-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
@@ -15,16 +16,27 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 
+=======
+import { ForestryWindowComponent } from './windows/forestry-window/forestry-window.component';
+import { ForestryListComponent } from './views/forestry-list/forestry-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+>>>>>>> master
 
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     ForestryViewComponent,
     AddForestryDialogComponent
+=======
+    ForestryWindowComponent,
+    ForestryListComponent
+>>>>>>> master
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+<<<<<<< HEAD
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
@@ -35,6 +47,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
+=======
+    BrowserAnimationsModule
+>>>>>>> master
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
+from typing import Optional
 from pydantic import BaseModel
-from pydantic.types import UUID4, conlist
+from pydantic.types import UUID1, conlist
 
 
 class Coordinates(BaseModel):
@@ -7,7 +8,7 @@ class Coordinates(BaseModel):
     y: float
 
 
-class Forestry(BaseModel):
-    id: UUID4
+class ForestryDto(BaseModel):
+    id: Optional[UUID1]
     location: conlist(Coordinates, min_items=3)
     name: str

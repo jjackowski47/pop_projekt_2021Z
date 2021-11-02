@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ForestryViewComponent } from './views/forestry-view/forestry-view.component';
+import { ForestryWindowComponent } from './windows/forestry-window/forestry-window.component';
 
 const routes: Routes = [
-  { path: '', component: ForestryViewComponent }
+  { path: '', component: ForestryWindowComponent }
 ];
 
 @NgModule({
