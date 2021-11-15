@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
-from app.api.forestry_api import forestry_api
-from app.api.sensors_api import sensor_api
+from app.api.forestry_api_imp import forestry_api
+from app.api.sensors_api_imp import sensor_api
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
