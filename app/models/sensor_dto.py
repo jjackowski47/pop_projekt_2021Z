@@ -1,11 +1,14 @@
 from typing import Literal, Optional
 from pydantic import BaseModel
-from pydantic.types import UUID1
+from pydantic.types import UUID1, confloat
 
 
 class Coordinates(BaseModel):
-    x: float
-    y: float
+    long: confloat(ge=-180.0, le=180.0)
+    lat: confloat(ge=-180.0, le=180.0)
+
+    def __hash__(self):
+        return hash((self.long, self.lat))
 
 
 class SensorDto(BaseModel):
