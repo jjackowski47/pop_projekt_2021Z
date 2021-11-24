@@ -6,64 +6,61 @@ from app.models.sensor_dto import SensorDto, Coordinates
 
 import re
 
+with Database() as db:
+    class SensorDaoImp(SensorDao):
 
-class SensorDaoImp(SensorDao):
+        def save(sensor_dto: SensorDto):
+                pointString = coordinateToPointString(sensor_dto.location)
+                sensor_row = db.SensorRow(
+                    location=pointString, type=sensor_dto.type, model=sensor_dto.model)
+                db.session.add(sensor_row)
+                db.session.commit()
+                return sensor_row.id
 
-    def save(sensor_dto: SensorDto):
-        with Database() as db:
-            pointString = coordinateToPointString(sensor_dto.location)
-            sensor_row = db.SensorRow(
-                location=pointString, type=sensor_dto.type, model=sensor_dto.model)
-            db.session.add(sensor_row)
-            db.session.commit()
-            return sensor_row.id
-
-    def get(id: UUID1):
-        with Database() as db:
-            sensor_row = db.session.query(db.SensorRow).filter(
-                db.SensorRow.id == id.hex).first()
-            point = pointStringToCoordinate(str(sensor_row.location))
-            return SensorDto(id=sensor_row.id, location=point, type=sensor_row.type, model=sensor_row.model)
-
-    def getAll():
-        with Database() as db:
-            sensors_dtos = []
-
-            for sensor_row in db.session.query(db.SensorRow).all():
+        def get(id: UUID1):
+                sensor_row = db.session.query(db.SensorRow).filter(
+                    db.SensorRow.id == id.hex).first()
                 point = pointStringToCoordinate(str(sensor_row.location))
-                sensors_dtos.append(SensorDto(
-                    id=sensor_row.id, location=point, type=sensor_row.type, model=sensor_row.model))
-            return sensors_dtos
+                return SensorDto(id=sensor_row.id, location=point, type=sensor_row.type, model=sensor_row.model)
 
-    def delete(id: UUID1):
-        pass
+        def getAll():
+                sensors_dtos = []
 
-    def update(sensor_dto: SensorDto):
-        pass
+                for sensor_row in db.session.query(db.SensorRow).all():
+                    point = pointStringToCoordinate(str(sensor_row.location))
+                    sensors_dtos.append(SensorDto(
+                        id=sensor_row.id, location=point, type=sensor_row.type, model=sensor_row.model))
+                return sensors_dtos
 
-    def addReadingsLog(sensorLog_dto):
-        pass
+        def delete(id: UUID1):
+            pass
 
-    def getReadingsLog(id: UUID1):
-        pass
+        def update(sensor_dto: SensorDto):
+            pass
 
-    def getAllReadingsLogs():
-        pass
+        def addReadingsLog(sensorLog_dto):
+            pass
 
-    def deleteReadingsLog(id: UUID1):
-        pass
+        def getReadingsLog(id: UUID1):
+            pass
 
-    def addEmergencyEvent(emergencyEvent_dto):
-        pass
+        def getAllReadingsLogs():
+            pass
 
-    def getEmergencyEvent(id: UUID1):
-        pass
+        def deleteReadingsLog(id: UUID1):
+            pass
 
-    def getAllEmergencyEvents():
-        pass
+        def addEmergencyEvent(emergencyEvent_dto):
+            pass
 
-    def deleteEmergencyEvent(id: UUID1):
-        pass
+        def getEmergencyEvent(id: UUID1):
+            pass
+
+        def getAllEmergencyEvents():
+            pass
+
+        def deleteEmergencyEvent(id: UUID1):
+            pass
 
 
 def pointStringToCoordinate(pointString: str):
