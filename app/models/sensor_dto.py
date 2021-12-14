@@ -16,3 +16,8 @@ class SensorDto(BaseModel):
     location: Coordinates
     type: Literal['FIRE', 'HUMIDITY']
     model: Optional[str] = 'SM-2000'
+    forestry_id: Optional[UUID1]
+
+class SensorRegistratorDto(BaseModel):
+    sensor_dto: SensorDto
+    token: str

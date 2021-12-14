@@ -15,6 +15,7 @@ class ForestryDto(BaseModel):
     id: Optional[UUID1]
     location: conlist(Coordinates, min_items=3)
     name: constr(regex=r"^[a-zA-Z0-9\s]+$")
+    sensors: Optional[List[UUID1]]
 
     @validator('location')
     def coords_create_polygon(cls, value: List[Coordinates]):
