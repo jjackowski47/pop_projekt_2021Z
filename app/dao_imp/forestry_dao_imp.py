@@ -28,8 +28,12 @@ with Database() as db:
             for forestry_row in db.session.query(db.ForestryRow).all():
                 coordinates = polygonStringToCoordinates(
                     str(forestry_row.location))
+                sensors = []
+                for sensor_row in db.session.query(db.SensorRow).all():
+                    if sensor_row.forestry_id == forestry_row.id:
+                        sensors.append(sensor_row.id)
                 forestries_dtos.append(ForestryDto(
-                    id=forestry_row.id, name=forestry_row.name, location=coordinates, sensors=[]))
+                    id=forestry_row.id, name=forestry_row.name, location=coordinates, sensors=sensors))
             return forestries_dtos
 
         def delete(id: UUID1):
