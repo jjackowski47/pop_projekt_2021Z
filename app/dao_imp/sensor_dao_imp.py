@@ -1,36 +1,55 @@
+from sqlalchemy.orm import session
+from sqlalchemy.sql.elements import Null
 from pydantic.types import UUID1
 
+from app.dao_imp.forestry_dao_imp import ForestryDaoImp
 from app.database import Database
 from app.interfaces.sensor_dao import SensorDao
 from app.models.sensor_dto import SensorDto, Coordinates
 
 import re
 
-with Database() as db:
-    class SensorDaoImp(SensorDao):
 
+with Database() as db:
+
+    class SensorDaoImp(SensorDao):
         def save(sensor_dto: SensorDto):
-                pointString = coordinateToPointString(sensor_dto.location)
-                sensor_row = db.SensorRow(
-                    location=pointString, type=sensor_dto.type, model=sensor_dto.model)
-                db.session.add(sensor_row)
-                db.session.commit()
-                return sensor_row.id
+            pointString = coordinateToPointString(sensor_dto.location)
+            sensor_row = db.SensorRow(
+                location=pointString, type=sensor_dto.type, model=sensor_dto.model
+            )
+            db.session.add(sensor_row)
+            db.session.commit()
+            return sensor_row.id
 
         def get(id: UUID1):
-                sensor_row = db.session.query(db.SensorRow).filter(
+            sensor_row = (
+                db.session.query(db.SensorRow).filter(
                     db.SensorRow.id == id.hex).first()
-                point = pointStringToCoordinate(str(sensor_row.location))
-                return SensorDto(id=sensor_row.id, location=point, type=sensor_row.type, model=sensor_row.model)
+            )
+            point = pointStringToCoordinate(str(sensor_row.location))
+            return SensorDto(
+                id=sensor_row.id,
+                location=point,
+                type=sensor_row.type,
+                model=sensor_row.model,
+            )
 
         def getAll():
-                sensors_dtos = []
+            sensors_dtos = []
 
-                for sensor_row in db.session.query(db.SensorRow).all():
-                    point = pointStringToCoordinate(str(sensor_row.location))
-                    sensors_dtos.append(SensorDto(
-                        id=sensor_row.id, location=point, type=sensor_row.type, model=sensor_row.model))
-                return sensors_dtos
+            for sensor_row in db.session.query(db.SensorRow).all():
+                point = pointStringToCoordinate(str(sensor_row.location))
+                sensors_dtos.append(
+                    SensorDto(
+                        id=sensor_row.id,
+                        location=point,
+                        type=sensor_row.type,
+                        model=sensor_row.model,
+                        forestry_id=sensor_row.forestry_id
+                    )
+                )
+            return sensors_dtos
 
         def delete(id: UUID1):
             pass
@@ -62,11 +81,21 @@ with Database() as db:
         def deleteEmergencyEvent(id: UUID1):
             pass
 
+        def sensorExistsById(id: UUID1) -> bool:
+            return db.session.query(db.SensorRow.id).filter_by(id=str(id)).first() is not None
+
+        def setForestryForSensor(sensorId: UUID1, forestryId: UUID1):
+            if sensorId is not None and forestryId is not None and SensorDaoImp.sensorExistsById(sensorId) and ForestryDaoImp.forestryExistsById(forestryId):
+                sensor = db.session.query(
+                    db.SensorRow).filter_by(id=sensorId).first()
+                sensor.forestry_id = forestryId
+                db.session.commit()
+
 
 def pointStringToCoordinate(pointString: str):
-    points = re.findall(r'[\d.-]+', pointString)
+    points = re.findall(r"[\d.-]+", pointString)
     return Coordinates(long=points[0], lat=points[1])
 
 
 def coordinateToPointString(coordinate):
-    return f'({coordinate.long}, {coordinate.lat})'
+    return f"({coordinate.long}, {coordinate.lat})"

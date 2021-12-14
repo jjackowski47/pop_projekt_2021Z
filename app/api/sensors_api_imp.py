@@ -3,6 +3,7 @@ from flask import Response
 
 from pydantic.error_wrappers import ValidationError
 
+from app.models.message import Message
 from app.logic.sensor_logic import SensorLogic
 
 sensor_api = Blueprint('sensor_api', __name__)
@@ -14,13 +15,10 @@ def getAll():
     return jsonify(sensors)
 
 
-@sensor_api.route("/sensor",  methods=['POST'])
-def registerSensor():
+@sensor_api.route("/assign",  methods=['POST'])
+def assignToForestry():
     content = request.json
 
-    try:
-        id = SensorLogic.save(content)
-    except ValidationError as e:
-        return Response(f"{e.json()}", 400)
+    message: Message = SensorLogic.assignToForestry(content)
 
-    return jsonify({'Message': 'Success', 'Sensor_id': id})
+    return Response(message.content, content_type="application/json", status=message.code)

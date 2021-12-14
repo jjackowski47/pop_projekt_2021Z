@@ -4,47 +4,48 @@ from app.models.forestry_dto import ForestryDto, Coordinates
 from app.database import Database
 import re
 
+
 with Database() as db:
     class ForestryDaoImp(ForestryDao):
 
         def save(forestry_dto: ForestryDto):
-                polygon_string = coordinatesToPolygonString(forestry_dto.location)
-                forestry_row = db.ForestryRow(
-                    name=forestry_dto.name, location=polygon_string)
-                db.session.add(forestry_row)
-                db.session.commit()
-                return forestry_row.id
+            polygon_string = coordinatesToPolygonString(forestry_dto.location)
+            forestry_row = db.ForestryRow(
+                name=forestry_dto.name, location=polygon_string)
+            db.session.add(forestry_row)
+            db.session.commit()
+            return forestry_row.id
 
         def get(id: UUID1):
-                forestry_row = db.session.query(db.ForestryRow).filter(
-                    db.ForestryRow.id == id.hex).first()
-                coordinates = polygonStringToCoordinates(
-                    str(forestry_row.location))
-                return ForestryDto(id=forestry_row.id, name=forestry_row.name, location=coordinates)
+            forestry_row = db.session.query(db.ForestryRow).filter(
+                db.ForestryRow.id == id.hex).first()
+            coordinates = polygonStringToCoordinates(
+                str(forestry_row.location))
+            return ForestryDto(id=forestry_row.id, name=forestry_row.name, location=coordinates)
 
         def getAll():
-                forestries_dtos = []
-                for forestry_row in db.session.query(db.ForestryRow).all():
-                    coordinates = polygonStringToCoordinates(
-                        str(forestry_row.location))
-                    forestries_dtos.append(ForestryDto(
-                        id=forestry_row.id, name=forestry_row.name, location=coordinates))
-                return forestries_dtos
+            forestries_dtos = []
+            for forestry_row in db.session.query(db.ForestryRow).all():
+                coordinates = polygonStringToCoordinates(
+                    str(forestry_row.location))
+                forestries_dtos.append(ForestryDto(
+                    id=forestry_row.id, name=forestry_row.name, location=coordinates, sensors=[]))
+            return forestries_dtos
 
         def delete(id: UUID1):
-                forestry = db.session.query(db.ForestryRow).filter(
-                    db.ForestryRow.id == id.hex).first()
-                db.session.delete(forestry)
+            forestry = db.session.query(db.ForestryRow).filter(
+                db.ForestryRow.id == id.hex).first()
+            db.session.delete(forestry)
 
         def update(forestry_dto: ForestryDto):
-                forestry_row = db.session.query(db.ForestryRow).filter(
-                    db.ForestryRow.id == forestry_dto.id.hex).first()
-                forestry_row.name = forestry_dto.name
-                polygon_string = coordinatesToPolygonString(forestry_dto.location)
-                forestry_row.location = polygon_string
+            forestry_row = db.session.query(db.ForestryRow).filter(
+                db.ForestryRow.id == forestry_dto.id.hex).first()
+            forestry_row.name = forestry_dto.name
+            polygon_string = coordinatesToPolygonString(forestry_dto.location)
+            forestry_row.location = polygon_string
 
-        def existsById(id: UUID1) -> bool:
-            pass
+        def forestryExistsById(id: UUID1) -> bool:
+            return db.session.query(db.ForestryRow.id).filter_by(id=str(id)).first() is not None
 
 
 def polygonStringToCoordinates(polygonString: str):
