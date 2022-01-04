@@ -31,7 +31,8 @@ class ForestActionDto(BaseModel):
     @root_validator
     def subtype_required_if_type_DEFORESTRATION(cls, values):
         if values.get('type') == 'DEFORESTRATION':
-            assert 'subtype' in values and len(values.get(
+            subtype = values.get('subtype')
+            assert subtype is not None and len(values.get(
                 'subtype')) > 0, 'subtype required for type DEFORESTRATION'
         return values
 
