@@ -11,3 +11,7 @@ class IForestryLogic(metaclass=ABCMeta):
     @abstractmethod
     def getAll() -> List[dict]:
         ...
+
+    @abstractmethod
+    def forestryExistsById(id: UUID1) -> bool:
+        ...

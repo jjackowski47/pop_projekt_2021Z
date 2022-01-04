@@ -4,8 +4,6 @@ from flask import Response
 from pydantic.error_wrappers import ValidationError
 from app.logic.sensor_registrator_logic import SensorRegistratorLogic
 
-from app.logic.authentication_logic import AuthenticationLogic
-
 
 sensor_registrator_api = Blueprint('sensor_registrator_api', __name__)
 
