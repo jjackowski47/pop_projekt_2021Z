@@ -28,8 +28,9 @@ with Database() as db:
         def save(forestActionDto: ForestActionDto):
             polygon_string = coordinatesToPolygonString(
                 forestActionDto.location)
+            subtype = forestActionDto.subtype if forestActionDto.subtype else "null"
             forest_action_row = db.ForestActionRow(
-                location=polygon_string, type=forestActionDto.type, subtype=forestActionDto.subtype, forestry_id=str(
+                location=polygon_string, type=forestActionDto.type, subtype=subtype, forestry_id=str(
                     forestActionDto.forestry_id)
             )
             db.session.add(forest_action_row)
